@@ -26,6 +26,7 @@ type payment struct {
 }
 
 type paymentsWithUserInfo struct {
+	Version  string
 	Payments []payment
 	User     user
 }
@@ -60,6 +61,7 @@ func (db *db) getPaymentsByUserID(userID int) *paymentsWithUserInfo {
 	content, _ := ioutil.ReadAll(resp.Body)
 	err = json.Unmarshal(content, &user)
 	return &paymentsWithUserInfo{
+		Version:  "v2",
 		Payments: payments,
 		User:     user,
 	}
